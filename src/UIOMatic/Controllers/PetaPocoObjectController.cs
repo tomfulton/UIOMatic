@@ -139,6 +139,18 @@ namespace UIOMatic.Controllers
 
         }
 
+        public UIOMaticTypeInfo GetType(string typeName)
+        {
+            var currentType = Type.GetType(typeName);
+            var tableName = (TableNameAttribute)Attribute.GetCustomAttribute(currentType, typeof(TableNameAttribute));
+            var uioMaticAttri = (UIOMaticAttribute)Attribute.GetCustomAttribute(currentType, typeof(UIOMaticAttribute));
+
+            return new UIOMaticTypeInfo()
+            {
+                RenderType = uioMaticAttri.RenderType
+            };
+        }
+
         public string GetPrimaryKeyColumnName(string typeName)
         {
             var ar = typeName.Split(',');
