@@ -11,5 +11,7 @@ namespace UIOMatic.Models
         public UIOMaticRenderType RenderType { get; set; }
 
         public string PrimaryKeyColumnName { get; set; }
+
+        public string[] IgnoreColumnsFromListView { get; set; }
     }
 }
