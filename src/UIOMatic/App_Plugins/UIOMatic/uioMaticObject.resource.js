@@ -17,9 +17,6 @@
 	        getType: function (type) {
 	            return $http.get(Umbraco.Sys.ServerVariables.uioMatic.ppcBaseUrl + "GetType?typeName=" + type);
 	        },
-	        getPrimaryKeyColumnName: function(type) {
-	            return $http.get(Umbraco.Sys.ServerVariables.uioMatic.ppcBaseUrl + "GetPrimaryKeyColumnName?typeName=" + type);
-	        },
 	        create: function (type, object) {
 	            var item = {};
 	            item.typeOfObject = type;
