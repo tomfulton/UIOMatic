@@ -17,26 +17,31 @@ angular.module("umbraco").controller("uioMatic.ObjectEditController",
 	    }
 	    uioMaticObjectResource.getType($scope.typeName).then(function (response) {
 	        $scope.type = response.data;
-	    });
-	    uioMaticObjectResource.getAllProperties($scope.typeName).then(function (response) {
-	        $scope.properties = response.data;
-	        
+	        $scope.typeHasCustomNameField = $scope.type.NameProperty.length > 0;
 
-	        if (isNaN($routeParams.id.split("?")[0])) {
-	            $scope.object = {};
-	            $scope.loaded = true;
-	        }
-	        else {
+	        uioMaticObjectResource.getAllProperties($scope.typeName).then(function (response) {
+	            $scope.properties = response.data;
+	            $scope.type.NameFieldIndex = _.indexOf(_.pluck($scope.properties, "Key"), $scope.type.NameProperty);
 
-	            uioMaticObjectResource.getById($routeParams.id.split("=")[1], $routeParams.id.split("?")[0]).then(function (response) {
-	                $scope.object = response.data;
 
+	            if (isNaN($routeParams.id.split("?")[0])) {
+	                $scope.object = {};
 	                $scope.loaded = true;
+	            }
+	            else {
 
-	                setValues();
-	            });
-	        }
+	                uioMaticObjectResource.getById($routeParams.id.split("=")[1], $routeParams.id.split("?")[0]).then(function (response) {
+	                    $scope.object = response.data;
+
+	                    $scope.loaded = true;
+
+	                    setValues();
+	                });
+	            }
+	        });
+
 	    });
+	    
 
 	    
 
@@ -139,4 +144,19 @@ angular.module("umbraco").controller("uioMatic.ObjectEditController",
 	    };
 
 	    
-	});
+	}).filter("displayedProperties", function () {
+	    return function (input, nameField) {
+	        var out = [];
+
+	        if (nameField == null || nameField == "")
+	            return input;
+
+	        angular.forEach(input, function (property) {
+	            if (property.Key != nameField) {
+	                out.push(property);
+	            }
+	        });
+
+	        return out;
+	    }
+	});;

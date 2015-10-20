@@ -24,6 +24,7 @@
     <NuGetPackageImportStamp>b4c8d681</NuGetPackageImportStamp>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -259,6 +260,7 @@
     <Compile Include="Atributes\UIOMaticFieldAttribute.cs" />
     <Compile Include="Atributes\UIOMaticIgnoreFieldAttribute.cs" />
     <Compile Include="Atributes\UIOMaticIgnoreFromListViewAttribute.cs" />
+    <Compile Include="Atributes\UIOMaticNameFieldAttribute.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Controllers\ObjectController.cs" />
     <Compile Include="Controllers\PetaPocoObjectController.cs" />
